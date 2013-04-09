@@ -6,7 +6,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :avatar
   validates :name, :presence => true
+  has_attached_file :avatar, :styles => { :thumb => "100x100>" }, :default_url => "/assets/rails.png", :url => "/assets/users/:id/:style/:basename.:extension",
+  :path => ":rails_root/public/assets/users/:id/:style/:basename.:extension"
   # attr_accessible :title, :body
 end
