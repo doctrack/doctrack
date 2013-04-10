@@ -30,6 +30,7 @@ gem 'kaminari'
 gem 'omniauth'
 gem 'pg'
 gem 'bootstrap-sass'
+gem 'mercury-rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

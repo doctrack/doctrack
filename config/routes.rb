@@ -1,5 +1,7 @@
 Doctrack::Application.routes.draw do
   
+  mount Mercury::Engine => '/'
+
   get "home/index"
 
   devise_for :users
