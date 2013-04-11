@@ -1,0 +1,17 @@
+<h3>Create A New Document</h3>
+<%= form_for(@doc) do |f| %>
+<% if @doc.errors.any? %>
+<%= pluralize(@doc.errors.count, "error") %>
+<% @doc.errors.full_messages.each do |msg| %>
+<%= msg %>
+
+<% end %>
+<% end %>
+<div class="field">
+<%= f.label :name %>
+<%= f.text_field :name %>
+</div>
+<div class="action">
+<%= f.submit :Create %>
+</div>
+<% end %>

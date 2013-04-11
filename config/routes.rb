@@ -1,5 +1,11 @@
 Doctrack::Application.routes.draw do
   
+
+
+ namespace :mercury do
+      resources :images
+    end
+
   mount Mercury::Engine => '/'
 
   get "home/index"
@@ -10,6 +16,10 @@ Doctrack::Application.routes.draw do
   end
   root :to => "home#index"
   resources :users
+  resources :docs do
+    resources :pages
+  end
+  
   
 
   # The priority is based upon order of creation:

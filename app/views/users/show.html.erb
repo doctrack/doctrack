@@ -2,3 +2,7 @@
 <p>User: <%= @user.name %></p>
 <p>Email: <%= @user.email if @user.email %></p>
 <%= image_tag @user.avatar.url(:thumb) %>
+<h4><%= link_to "Your Documents", docs_path() %></h4>
+<h4><%= link_to "Create A Document", new_doc_path() %></h4>
+
+
