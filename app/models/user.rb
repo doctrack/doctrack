@@ -10,5 +10,7 @@ class User < ActiveRecord::Base
   validates :name, :presence => true
   has_attached_file :avatar, :styles => { :thumb => "100x100>" }, :default_url => "/assets/rails.png", :url => "/assets/users/:id/:style/:basename.:extension",
   :path => ":rails_root/public/assets/users/:id/:style/:basename.:extension"
+  has_many :docs
+  has_many :doc_items, :through => :doc
   # attr_accessible :title, :body
 end

@@ -1,13 +1,25 @@
 Doctrack::Application.routes.draw do
   
+
+
+ namespace :mercury do
+      resources :images
+    end
+
+  mount Mercury::Engine => '/'
+
   get "home/index"
 
   devise_for :users
   authenticated :user do
-    root :to => 'home#index'
+    root :to => 'users#show'
   end
   root :to => "home#index"
   resources :users
+  resources :docs do
+    resources :pages
+  end
+  
   
 
   # The priority is based upon order of creation:

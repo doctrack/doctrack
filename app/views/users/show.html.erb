@@ -1,4 +1,12 @@
-<h3>User</h3>
-<p>User: <%= @user.name %></p>
-<p>Email: <%= @user.email if @user.email %></p>
-<%= image_tag @user.avatar.url(:thumb) %>
+<h3>Welcome To Doctrack</h3>
+<h4>Your Documents</h4>
+<div class = "documents_list">
+	<% @doc.each do |doc| %>
+<%= link_to doc.name, doc_path(doc) %><br />
+<% end %>
+	
+	
+</div>
+<div class = "document_create"><%= link_to "Create A Document", new_doc_path() %></div>
+
+

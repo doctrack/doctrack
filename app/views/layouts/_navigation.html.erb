@@ -1,7 +1,11 @@
-<%= link_to "Home", root_path, :class => 'brand' %>
+<%= link_to "Home", root_path, :class => 'brand' %><br>
 <ul class="nav">
   <% if user_signed_in? %>
+  <li>
+  	<%= image_tag current_user.avatar.url(:thumb), :style => 'height:30px;width:30px' %>
+  	hello <%= current_user.name %>
     <li>
+    <li>	
     <%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %>
     </li>
   <% else %>
@@ -19,3 +23,4 @@
     </li>
   <% end %>
 </ul>
+

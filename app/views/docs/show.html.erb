@@ -1,0 +1,13 @@
+<h3>Your Chapters</h3>
+
+<h4>Document Name:  <%= @doc.name %></h4><br />
+
+<div id="chapter_list">
+	
+<%= sanitize(get_chapters) %>
+    
+</div>
+
+<div id="chapter_create">
+<%= link_to 'Create chapter' ,new_doc_page_path(@doc), :id => 'new_link' %> 
+</div>

@@ -1,0 +1,4 @@
+<h3>Your Docs</h3>
+<% @doc.each do |doc| %>
+<%= link_to doc.name, doc_path(doc) %><br />
+<% end %>
