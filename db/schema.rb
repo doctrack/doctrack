@@ -11,7 +11,36 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130409151153) do
+ActiveRecord::Schema.define(:version => 20130410101944) do
+
+  create_table "doc_items", :force => true do |t|
+    t.integer  "doc_id"
+    t.string   "chapter_name"
+    t.text     "content"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "docs", :force => true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.string   "doc_type",   :default => "single"
+    t.string   "group_id"
+    t.boolean  "status",     :default => true
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+  end
+
+  add_index "docs", ["name"], :name => "index_docs_on_name"
+
+  create_table "mercury_images", :force => true do |t|
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false
