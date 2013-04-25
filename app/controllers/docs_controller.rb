@@ -31,6 +31,38 @@ class DocsController < ApplicationController
   def destroy
     
   end
+  
+  def add_collabarator
+    @doc_id = params[:id]
+    
+  end
+  
+  def create_collabarator
+    @doc_id = params[:id]
+     @user = User.find_by_username(params[:name])
+    if(@user)
+      
+    @permission = Permission.new
+    @permission.thing = Doc.find(params[:id])
+    @permission.user_id = @user.id
+    if(@permission.save)
+      
+    redirect_to(add_collabarator_doc_path, :notice => "Successfully Created The Document") 
+    else
+      flash.now[:alert] ="Sorry Unable To Add Collabarator"
+      render :action => 'add_collabarator'
+      
+    end
+    
+    else
+      flash.now[:alert] = "Sorry No User Found"
+      render :action => 'add_collabarator'
+      
+    end
+      
+    
+    
+  end
 
   
 end

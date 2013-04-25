@@ -21,6 +21,8 @@ Doctrack::Application.routes.draw do
   resources :profiles
   resources :docs do
     resources :pages
+    post :create_collabarator, :on => :member
+    get  :add_collabarator, :on => :member
   end
   
   

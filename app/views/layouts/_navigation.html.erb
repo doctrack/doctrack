@@ -2,7 +2,9 @@
 <ul class="nav">
   <% if user_signed_in? %>
   <li>
-  	 <%= image_tag current_user.try(:profile).avatar.url(:thumb), :style => 'height:30px;width:30px' %>
+  	<% if !current_user.profile.nil? %>
+  	 <%= image_tag current_user.try(:profile).try(:avatar).url(:thumb), :style => 'height:30px;width:30px' %>
+  	 <% end %>
   	hello <%= current_user.username %>
     <li>
     <li>	

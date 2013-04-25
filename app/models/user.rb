@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_one :profile
   has_many :docs
   has_many :doc_items, :through => :doc
+  has_many :permissions
   
   
   # attr_accessible :title, :body

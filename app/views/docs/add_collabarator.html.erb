@@ -1,0 +1,8 @@
+<%= form_tag create_collabarator_doc_path(@doc_id), :method => :post do %>
+<label for= "name">Name:</label>
+<%= text_field_tag :name, params[:name] %>
+
+<%= submit_tag :add %>
+
+
+<% end %>
