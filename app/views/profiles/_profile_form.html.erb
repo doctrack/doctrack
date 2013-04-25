@@ -1,0 +1,19 @@
+<%= form_for(@profile) do |f| %>
+<% if @profile.errors.any? %>
+
+<%= pluralize(@profile.errors.count, "error" )%>
+<% @doc.errors.full_messages.each do |msg| %>
+<%= msg %>
+
+<% end %>
+<% end %>
+<%= f.label :first_name %>
+<%= f.text_field :first_name %> <br />
+<%= f.label :last_name %>
+<%= f.text_field :last_name %> <br />
+<%= f.label :publec_email %>
+<%= f.text_field :public_email %> <br />
+<p><%= f.label :avatar, "Add An Avatar" %><br />
+<%= f.file_field :avatar %>
+<%= f.submit :save %>
+<% end %>

@@ -15,7 +15,10 @@ Doctrack::Application.routes.draw do
     root :to => 'users#show'
   end
   root :to => "home#index"
-  resources :users
+  resources :users do
+    
+  end
+  resources :profiles
   resources :docs do
     resources :pages
   end

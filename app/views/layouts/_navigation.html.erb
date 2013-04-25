@@ -2,8 +2,8 @@
 <ul class="nav">
   <% if user_signed_in? %>
   <li>
-  	<%= image_tag current_user.avatar.url(:thumb), :style => 'height:30px;width:30px' %>
-  	hello <%= current_user.name %>
+  	 <%= image_tag current_user.try(:profile).avatar.url(:thumb), :style => 'height:30px;width:30px' %>
+  	hello <%= current_user.username %>
     <li>
     <li>	
     <%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %>
@@ -17,6 +17,9 @@
     <li>
     <%= link_to 'Edit account', edit_user_registration_path %>
     </li>
+    <li>
+    	<%= link_to 'Edit Profile', edit_profile_path(current_user) %>
+    	</li>
   <% else %>
     <li>
     <%= link_to 'Sign up', new_user_registration_path %>
