@@ -2,8 +2,11 @@ class DocsController < ApplicationController
    before_filter :authenticate_user!
   
   def show
-    @doc = current_user.docs.find(params[:id])
-    @docitem = DocItem.where(:doc_id => @doc.id).all
+   
+    @doc = Doc.find(params[:id])
+    @docitem = @doc.doc_items
+    authorize! :view, @doc
+   
   end
  
   def new
@@ -22,10 +25,12 @@ class DocsController < ApplicationController
   
   def index
     @doc = current_user.docs.all
+     @doc_friends = Permission.where(:user_id => current_user).all
   end
 
   def edit
     @doc = Doc.find(params[:id])
+    
   end
 
   def destroy
@@ -37,22 +42,42 @@ class DocsController < ApplicationController
     
   end
   
+  def set_permission(doc_id,user_id,action)
+   is_present = Permission.where(:user_id => user_id, :thing_id => doc_id, :action => action).first
+   unless(is_present)
+    @permission = Permission.new
+    @permission.thing = Doc.find(doc_id)
+    @permission.user_id = user_id 
+    @permission.action = action
+    return @permission.save
+    else
+      return true
+    end
+    
+    
+  end
+  
   def create_collabarator
     @doc_id = params[:id]
      @user = User.find_by_username(params[:name])
-    if(@user)
+   if(@user)
       
-    @permission = Permission.new
-    @permission.thing = Doc.find(params[:id])
-    @permission.user_id = @user.id
-    if(@permission.save)
+     case params[:action_type].to_i
+       when 1
+         status = set_permission(params[:id],@user.id,'view')
+       when 2
+         status = set_permission(params[:id],@user.id,'view') && set_permission(params[:id],@user.id,'edit')
+       else
+         status = false
+     end   
+   
+     if(status) 
+        redirect_to(add_collabarator_doc_path, :notice => "Successfully Created The Document") 
+     else
+        flash.now[:alert] ="Sorry Unable To Add Collabarator"
+        render :action => 'add_collabarator'
       
-    redirect_to(add_collabarator_doc_path, :notice => "Successfully Created The Document") 
-    else
-      flash.now[:alert] ="Sorry Unable To Add Collabarator"
-      render :action => 'add_collabarator'
-      
-    end
+     end
     
     else
       flash.now[:alert] = "Sorry No User Found"
@@ -60,7 +85,10 @@ class DocsController < ApplicationController
       
     end
       
-    
+  end
+  
+  def show_friends_doc
+    @doc_friends = Doc.where(:user_id => current_user).all
     
   end
 

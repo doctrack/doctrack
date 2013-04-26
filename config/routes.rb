@@ -25,7 +25,7 @@ Doctrack::Application.routes.draw do
     get  :add_collabarator, :on => :member
   end
   
-  
+  get "/friends/doc", :to => "docs#show_friends_doc", :as => 'show_friends_doc'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

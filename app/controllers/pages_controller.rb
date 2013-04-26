@@ -6,12 +6,14 @@ class PagesController < ApplicationController
 
   def new
     
-    @doc = current_user.docs.find(params[:doc_id])
+    @doc = Doc.find(params[:doc_id])
+    authorize! :edit, @doc
     @chapter = @doc.doc_items.new
   end
   
   def create
-    @doc = current_user.docs.find(params[:doc_id])
+    @doc = Doc.find(params[:doc_id])
+    authorize! :edit, @doc
     @chapter = @doc.doc_items.new(params[:doc_item])
    
     if(@chapter.save)
@@ -22,7 +24,8 @@ class PagesController < ApplicationController
   end
   
   def update
-    @doc = current_user.docs.find(params[:doc_id])
+    @doc = Doc.find(params[:doc_id])
+    authorize! :edit, @doc
     @doc_item = @doc.doc_items.find(params[:id])
     if @doc_item.update_attributes(params[:doc_item])
       redirect_to(edit_doc_page_path(:doc_id => @doc, :id => params[:id] ), :notice => "Saved Successfully") 
@@ -33,12 +36,14 @@ class PagesController < ApplicationController
   end
 
   def edit
-    @doc = current_user.docs.find(params[:doc_id])
+    @doc = Doc.find(params[:doc_id])
+    authorize! :edit, @doc
     @chapter = @doc.doc_items.find(params[:id])
   end
   
   def destroy
-    @doc = current_user.docs.find(params[:doc_id])
+    @doc = Doc.find(params[:doc_id])
+    authorize! :destroy, @doc
     @chapter = @doc.doc_items.find(params[:id])
     if(@chapter.destroy)
       redirect_to(doc_path(@doc))
