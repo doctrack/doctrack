@@ -5,6 +5,7 @@ class DocsController < ApplicationController
    
     @doc = Doc.find(params[:id])
     @docitem = @doc.doc_items
+    @chapter = @docitem.first
     authorize! :view, @doc
    
   end

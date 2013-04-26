@@ -17,7 +17,7 @@ class PagesController < ApplicationController
     @chapter = @doc.doc_items.new(params[:doc_item])
    
     if(@chapter.save)
-     redirect_to(edit_doc_page_path(:doc_id => @doc, :id => @chapter), :notice => "You Have Now Created A New Chapter") 
+     redirect_to(doc_path(@doc), :notice => "You Have Now Created A New Chapter") 
     else
       render :action => 'new'
    end 
@@ -28,7 +28,7 @@ class PagesController < ApplicationController
     authorize! :edit, @doc
     @doc_item = @doc.doc_items.find(params[:id])
     if @doc_item.update_attributes(params[:doc_item])
-      redirect_to(edit_doc_page_path(:doc_id => @doc, :id => params[:id] ), :notice => "Saved Successfully") 
+      redirect_to(doc_path(@doc), :notice => "Saved Successfully") 
     else
       render :action => "edit"
     end
@@ -54,6 +54,13 @@ class PagesController < ApplicationController
   end
 
   def show
+     @doc = Doc.find(params[:doc_id])
+    authorize! :view, @doc
+    @chapter = @doc.doc_items.find(params[:id])
+    respond_to do |format|
+      
+      format.js 
+    end
     
   end
 end

@@ -1,13 +1,32 @@
 <h3>Your Chapters</h3>
 
+<%= link_to "Go Home", docs_path %>
 <h4>Document Name:  <%= @doc.name %></h4><br />
 
 <div id="chapter_list">
 	
-<%= sanitize(get_chapters) %>
+<% @docitem.try(:each) do |chapter| %>
+
+<%=link_to chapter.chapter_name, doc_page_path(:id => chapter.id, :doc_id => @doc.id, :format => :js), :remote => true %> 
+<% if can?(:edit, @doc)%>
+|<%=link_to 'edit', edit_doc_page_path(:id => chapter.id, :doc_id => @doc.id, :format => :js), :remote => true %>
+<% end %>
+<% if can?(:destroy, @doc)%>
+|<%=link_to 'delete', doc_page_path(:id => chapter.id, :doc_id => @doc.id), {:method => 'delete', :confirm => 'Are You Sure'} %> 
+
+<% end %>
+<br />
+<% end %>
     
 </div>
 
 <div id="chapter_create">
 <%= link_to 'Create chapter' ,new_doc_page_path(@doc), :id => 'new_link' %> 
 </div>
+
+<div class = "chapters" style = "margin-left: 467px;margin-top: -128px;position:absolute">
+	<% if @chapter %>
+	<%= render "view_chapters" %>%
+	<% end %>
+</div>
+
