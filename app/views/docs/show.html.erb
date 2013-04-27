@@ -30,3 +30,18 @@
 	<% end %>
 </div>
 
+<div class="left_panel" style="float:right;margin-top:-213px">
+	<div class="collabarators">
+	<%= link_to 'Add Collabarator', add_collabarator_doc_path(@doc) %><br />
+	<h4>Collabarators</h4>
+	<% @collabarators.try(:each) do |collabarator|%>
+	 <%= collabarator.username %>
+     <%end%>
+     <div class = "export">
+     	<%= link_to "PDF Export", export_pdf_doc_path(@doc, :format => :pdf) %>
+     	</div>
+	</div>
+
+
+
+

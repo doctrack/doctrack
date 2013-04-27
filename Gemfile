@@ -32,6 +32,7 @@ gem 'pg'
 gem 'bootstrap-sass'
 gem 'mercury-rails'
 gem 'validates_email_format_of', :git => 'git://github.com/alexdunae/validates_email_format_of.git'
+gem 'wicked_pdf'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

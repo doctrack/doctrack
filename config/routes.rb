@@ -21,8 +21,9 @@ Doctrack::Application.routes.draw do
   resources :profiles
   resources :docs do
     resources :pages
-    post :create_collabarator, :on => :member
+    post :create_collabarator, :on => :member 
     get  :add_collabarator, :on => :member
+    get  :export_pdf, :on => :member
   end
   
   get "/friends/doc", :to => "docs#show_friends_doc", :as => 'show_friends_doc'

@@ -4,8 +4,9 @@ class DocsController < ApplicationController
   def show
    
     @doc = Doc.find(params[:id])
-    @docitem = @doc.doc_items
+    @docitem = @doc.doc_items 
     @chapter = @docitem.first
+    @collabarators = User.joins(:permissions).where("permissions.thing_id" => @doc.id)
     authorize! :view, @doc
    
   end
@@ -91,6 +92,20 @@ class DocsController < ApplicationController
   def show_friends_doc
     @doc_friends = Doc.where(:user_id => current_user).all
     
+  end
+  
+  def export_pdf
+    
+        @doc = Doc.find(params[:id])
+        @chapters = @doc.doc_items
+        respond_to do |format|
+        format.pdf do
+          render :pdf => "#{@doc.name}"
+  
+            end
+            
+          end
+  
   end
 
   
