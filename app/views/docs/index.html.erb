@@ -1,0 +1,20 @@
+<h3>Your Docs</h3>
+<% @doc.each do |doc| %>
+<%= link_to doc.name, doc_path(doc) %><br />
+<%= link_to 'Add Collabarator', add_collabarator_doc_path(doc) %><br />
+<% end %>
+<div class = "document_create"><%= link_to "Create A Document", new_doc_path() %></div>
+<div class="friends_doc_list">
+<h4>Friends Docs</h4>
+<% if !@doc_friends.empty? %>
+<% @doc_friends.try(:each) do |doc_users| %>
+ <% doc_row = doc_users.thing %>
+<%= link_to doc_row.name, doc_path(doc_row) %><br />
+<% end %>
+<% else %>
+<p>You have no friends doc right now</p>
+<% end %>
+</div>	
+
+	
+	

@@ -1,0 +1,13 @@
+<%= form_tag create_collabarator_doc_path(@doc_id), :method => :post do %>
+<label for= "name">Userame:</label>
+
+<%= text_field_tag :name, params[:name] %>
+<h4><label for = "Permission">Set Permission</label></h4>
+<label for="view">View</label>
+<%= radio_button_tag :action_type, '1'%><br>
+<label for="view">View And Delete</label>
+<%= radio_button_tag :action_type, '2'%><br>
+<%= submit_tag :add %>
+
+
+<% end %>

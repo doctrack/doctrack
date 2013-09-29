@@ -1,14 +1,32 @@
 Doctrack::Application.routes.draw do
   
+
+
+ namespace :mercury do
+      resources :images
+    end
+
+  mount Mercury::Engine => '/'
+
   get "home/index"
 
   devise_for :users
   authenticated :user do
-    root :to => 'home#index'
+    root :to => 'users#show'
   end
   root :to => "home#index"
-  resources :users
+  resources :users do
+    
+  end
+  resources :profiles
+  resources :docs do
+    resources :pages
+    post :create_collabarator, :on => :member 
+    get  :add_collabarator, :on => :member
+    get  :export_pdf, :on => :member
+  end
   
+  get "/friends/doc", :to => "docs#show_friends_doc", :as => 'show_friends_doc'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

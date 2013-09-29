@@ -1,0 +1,8 @@
+<h1><%= @doc.name %></h1>
+<div>
+	<% @chapters.try(:each) do |chapter| %>
+	<h4><%= chapter.chapter_name %></h4>
+	<p><%= chapter.content %></p>
+	<br>
+	<% end %>
+	</div>

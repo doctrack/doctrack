@@ -1,0 +1,21 @@
+<h3>Edit chapter <%= @chapter.chapter_name  %></h3>
+<%= form_for(chapter, :url => doc_page_path(:doc_id => @doc)) do |f| %>
+<% if @chapter.errors.any? %>
+<%= pluralize(@chapter.errors.count, "error") %>
+<% @chapter.errors.full_messages.each do |msg| %>
+<%= msg %>
+
+<% end %>
+<% end %>
+<div class="field">
+<%= f.label :chapter_name %>
+<%= f.text_field :chapter_name %>
+<%= f.label :content %>
+<%= f.text_area :content, :size => '50x10'%>
+</div>
+<div class="action">
+<%= f.submit :Save %>
+<%= link_to "Delete", doc_page_path(:id => @chapter, :doc_id => @doc) , {class: "delete", confirm: "Are U sure?" ,method: 'delete' } %>
+</div>
+<% end %>
+
